@@ -1,0 +1,179 @@
+---
+title: "GBI6 - BIOINFORMÁTICA"
+subtitle: "EXAMEN FINAL"
+author: 'Apellido Nombre'
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    highlight: espresso
+    theme: paper
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+![](./img/ikiam.png)
+
+**Bienvenidos al examen final de GBI6 - Bioinformática.**
+
+# CONTENIDO DE LA EVALUACIÓN
+
+Los contenidos de esta evaluación corresponden a los temas de R revisados en el curso:
+
+-   Tipos de datos
+
+-   Instalación y uso de librerías. 
+
+-   Estructuras de control
+
+-   Funciones
+
+-   Manipulación de datos
+
+-   Estadística básica
+
+-   Visualización de datos
+
+# INDICACIONES GENERALES
+
+Esta permitido consultar todo material disponible: diapositivas, google...Sin embargo **NO** esta permitido consultar a sus colegas.
+
+Ustedes estan utilizando el R Markdown. Las instruciones son:
+
+-   Creen una carpeta en su computador con el nombre "GBI6_ExamenFinal" donde guarden este cuaderno .Rmd. 
+
+- Cree un subdirectorio de nombre "data" donde guarde la data que van a utilizar.
+
+- Cree un subdirectorio de nombre "results" donde guarde la tablas y figuras generadas del análisis.
+
+-   Definan a esa carpeta como su directorio de trabajo.
+
+-   Arriba, **solamente** donde dice "author", deben llenar sus nombres.
+
+-   Los codigos deben ser escritos dentro de las cajas que inician y terminan con \`\`\` o dentro de las cajas indicadas abajo de las preguntas.
+
+-   Al final del examen deben utilizar el comando "Knit" para generar un archivo .html
+
+-   Es recomendable crear una copia de este script guía.
+
+-   Genere controles de la versión para cada una de las preguntas con la leyenda "Nombre Apellido, resuelve el ejercicio XX". 
+
+- Copie y peque la dirección de su repositorio de GitHub en la actividad **"ExamenFinal"**.
+
+-   Asegúrese de responder explícitamente cada una de las preguntas.
+
+Para comprender la data de esta evaluación se requiere conocer el significado de algunos acrónimos de los tipos de cancer como indica el [Broad Institute Cancer Names](https://gdac.broadinstitute.org/). Asimismo revise la información de ayuda para ```expresionsTCGA```. La data contiene las columnas: 
+
+- **bcr_patient_barcode**: es el identificador del paciente. 
+
+- **dataset**: es el identificador del tipo de cancer del paciente. 
+
+- **resto de columnas**: nivees de expresión de los diferentes mRNA de los genes que están como nombre de columna (para este análisis se han seleccionado solamente 7 de ellos). 
+
+# PREGUNTAS
+## **Pregunta 1: MANIPULACIÓN DE DATOS [4 PUNTOS]**
+
+### [0.5 PUNTOS] 1.1 Defina su directorio de trabajo. 
+```{r wd}
+
+```
+
+### [0.5 PUNTOS] 1.2. Cargue la data "mRNA_expr.csv"
+```{r data}
+df <- "cargue la data"
+
+```
+
+### [1 PUNTO] 1.3 Cree una función de nombre ```long_df``` para transformar la data ```df``` de la forma wide a long.
+
+```{r funcion_long}
+# Escriba aquí la función long_df
+
+
+```
+
+
+### [1 PUNTO] Genere la data ```df_long``` utilizandola función ```long_df```. 
+La tabla resultante tendrá tres columnas: ```dataset, gen, expresion_level```.  
+```{r df_long}
+# Genere la data df_long 
+
+```
+
+### [0.5 PUNTOS] 1.5 A partir de la data ```df_long```, genere un **Descriptive table** (librería ```sjPlot```) y guárdelo en el subdirectorio "result"  con el nombre **mRNA_expr_summary.doc** (previamente debe seleccionar las celdas adecuadas con funciones de la librería ```dplyr``` en conjunto con el operador ```%>%```). 
+```{r desc_table}
+# Escriba el código para crear el Descriptive table 
+
+```
+
+### [0.5 PUNTOS] 1.6 Interprete los resultados de la tabla resultante de la sección 1.5. 
+
+
+```{tex}
+# Escriba aquí su interpretación 
+
+```
+
+
+
+## **Pregunta 2 VISUALIZACION DE DATOS  [5 PUNTOS]**
+
+Para esta pregunta tiene que utilizar la data ```df_long```. 
+
+### [1 PUNTO] 2.1 Cree la funcion ```tcga_boxplots``` para visualizar boxplots y jitterplots. El único parámetro de la función es ```dataset```. La función debe crear un boxplot de los niveles de expresión para cada gen.
+
+```{r}
+# Escriba el código para crear la función tcga_boxplots
+
+
+```
+
+### [0.5 PUNTOS] 2.2 Utilizando la función ```lapply()``` genera la lista ```cancertype_boxplots``` con las gráficas para cada tipo de cancer (cada tipo de dataset). 
+```{r list_boxplots}
+# Escriba el código para generar la lista. 
+
+
+```
+
+### [0.5 PUNTOS] 2.3 Guarde en el subdirectorio ```result``` el tercer plot de la lista ```cancertype_boxplots``` con el nombre ```boxplot3.png```. La definición de a figura debe ser de 300dpi. 
+```{r boxplot3}
+# Escriba el código para guardar la tercera figura de la lista. 
+
+
+```
+
+
+### [1 PUNTO] 2.4 Escriba la función ```reg_gen_expression```, con el parámetro ```gen```. En este caso la función visualizará una gráfica de nube de puntos (geom_point) y una regresión por tipo de "dataset". La gráfica será de comparación de gen1 con gen2; por ejemplo en el eje "x" ```GATA3``` y en el eje "y"" ```FN1```.  
+
+```{r reg_gen_exp}
+# Escriba aquí su función reg_gen_expression
+
+
+```
+
+
+### [0.5 PUNTOS] 2.5. Utilizando la función ```lapply()``` genera la lista ```reg_genplots``` con las gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas las combinaciones posibles por pares de genes (combinatoria sin repetición).
+```{r list_regplots}
+# Escriba el código para generar la lista. 
+
+```
+
+
+### [0.5 PUNTOS] 2.6. Guarde en el subdirectorio ```result``` el onceavo plot de la lista ```reg_genplots``` con el nombre ```regresion11.pdf```. La definición de a figura debe ser de 300dpi. 
+```{r reg11}
+# Escriba el código para guardar el onceavo plot. 
+
+```
+
+
+### [1 PUNTO] 2.7. Interprete los resultados de las figuras ```boxplot3.png``` y ```regresion11.pdf```.
+
+```{tex}
+# Esciba aquí su intepretación
+
+```
+
+## 3. CONTROL DE LA VERSIÓN [1 PUNTO]. Se verficará en ell repositorio de GitHub. 
+
