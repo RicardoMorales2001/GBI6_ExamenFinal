@@ -59,7 +59,7 @@ tcga_boxplots <- function(dataset){
 }
 tcga_boxplots(df_long)
 
-### 2.2 Utilizando la función lapply() genera la lista cancertype_boxplots con 
+### 2.2 Usando la función lapply() genera la lista cancertype_boxplots con 
 ### las gráficas para cada tipo de cancer (cada tipo de dataset).
 tipo_de_cancer <- list(
   BRCA <- filter(df_long, dataset == "BRCA"),
