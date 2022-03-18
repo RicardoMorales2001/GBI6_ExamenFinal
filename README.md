@@ -6,3 +6,6 @@
 - Windows 10 pro
 - Procesador Intel(R) Core(TM) i5-8250u
 - RAM de 8 GB
+### Programas usados 
+- GitHub Desktop
+- Rstudio
