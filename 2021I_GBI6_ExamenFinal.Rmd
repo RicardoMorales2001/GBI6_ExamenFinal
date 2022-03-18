@@ -14,7 +14,6 @@ output:
       smooth_scroll: yes
 ---
 
-![](./img/ikiam.png)
 
 **Bienvenidos al examen final de GBI6 - Bioinformática.**
 
@@ -90,9 +89,9 @@ df <- read.csv(dt)
 ### [1 PUNTO] 1.3 Cree una función de nombre ```long_df``` para transformar la data ```df``` de la forma wide a long.
 
 ```{r funcion_long}
-long_df <-function(df) {
   library(tidyr)
   library(dplyr)
+long_df <-function(df) {
   df$dataset <- as.factor(df$dataset)
   long_data <- gather(df, gen, expresion_level, GATA3, PTEN, XBP1, ESR1, MUC1, FN1, GAPDH, factor_key=TRUE)
   long_data1 <- select(long_data, -1)
@@ -107,10 +106,14 @@ La tabla resultante tendrá tres columnas: ```dataset, gen, expresion_level```.
 # Genere la data df_long 
 df_long <- long_df(df)
 test <- df_long %>% group_by(gen)
+test
 ```
 
 ### [0.5 PUNTOS] 1.5 A partir de la data ```df_long```, genere un **Descriptive table** (librería ```sjPlot```) y guárdelo en el subdirectorio "result"  con el nombre **mRNA_expr_summary.doc** (previamente debe seleccionar las celdas adecuadas con funciones de la librería ```dplyr``` en conjunto con el operador ```%>%```). 
 ```{r desc_table}
+library(sjPlot)
+library(sjmisc)
+
 c_m <- test %>% group_by(gen) %>% mutate(row = row_number()) %>%
  tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
  select(-row)
@@ -123,7 +126,6 @@ file = "mRNA_expr_summary.doc")
 
 
 ```{tex}
-# Escriba aquí su interpretación 
 
 ```
 
@@ -136,6 +138,8 @@ Para esta pregunta tiene que utilizar la data ```df_long```.
 ### [1 PUNTO] 2.1 Cree la funcion ```tcga_boxplots``` para visualizar boxplots y jitterplots. El único parámetro de la función es ```dataset```. La función debe crear un boxplot de los niveles de expresión para cada gen.
 
 ```{r}
+library(ggplot2)
+
 tcga_boxplots <- function(dataset){
   return(ggplot (dataset, aes(x = gen, y = expresion_level, color = gen)) + labs(x="Gen", y = "Expression level")
          + geom_boxplot() + geom_jitter(size=0.20))
@@ -320,17 +324,18 @@ reg_gen_expression <- function (gen) {
 
 ### [0.5 PUNTOS] 2.6. Guarde en el subdirectorio ```result``` el onceavo plot de la lista ```reg_genplots``` con el nombre ```regresion11.pdf```. La definición de a figura debe ser de 300dpi. 
 ```{r reg11}
-graficos_de_cancer <- reg_gen_expression("GATA3")
-graficos_cancer[[5]][[2]]
+
+
+graficasc <- reg_gen_expression("GATA3")
+graficasc[[5]][[2]]
+
+
 ggsave("regresion11.pdf", width = 6, height = 8, dpi = 300)
 ```
 
 
 ### [1 PUNTO] 2.7. Interprete los resultados de las figuras ```boxplot3.png``` y ```regresion11.pdf```.
-
 ```{tex}
-# Esciba aquí su intepretación
-
 ```
 
 ## 3. CONTROL DE LA VERSIÓN [1 PUNTO]. Se verficará en ell repositorio de GitHub. 
