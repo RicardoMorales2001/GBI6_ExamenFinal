@@ -224,3 +224,10 @@ reg_gen_expression <- function (gen) {
           geom_point() + geom_smooth(method='lm', formula= y~x)}))
   }
 }
+### 2.6. Guarde en el subdirectorio result el onceavo plot de la lista reg_genplots
+### con el nombre regresion11.pdf. La definición de a figura debe ser de 300dpi.
+graficos_de_cancer <- reg_gen_expression("GATA3")
+graficos_cancer[[5]][[2]]
+ggsave("regresion11.pdf", width = 6, height = 8, dpi = 300)
+
+### 2.7. Interprete los resultados de las figuras boxplot3.png y regresion11.pdf.
