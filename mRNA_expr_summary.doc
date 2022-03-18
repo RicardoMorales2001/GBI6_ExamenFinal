@@ -1,5 +1,5 @@
 <table style="border-collapse:collapse; border:none;">
-<caption style="font-weight: bold; text-align:left;">Estadistica del cancer de MAMA y el nivel de expresion de los diferentes genes</caption>
+<caption style="font-weight: bold; text-align:left;">Estadistica descriptiva del cancer de MAMA y su nivel de expresion de los diferentes genes</caption>
 <tr>
 <th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; text-align:left; ">var</th>
 <th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">type</th>
