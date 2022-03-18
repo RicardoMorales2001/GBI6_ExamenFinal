@@ -117,6 +117,10 @@ graficasc <- list (
     select(-row)
 )
 
+### 2.5. Utilizando la función lapply() genera la lista reg_genplots con las 
+### gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de 
+### genes, se debe tener todas las combinaciones posibles por pares de genes 
+### (combinatoria sin repetición).
 reg_gen_expression <- function (gen) {
   if (gen == "GATA3"){
     total <- list (
