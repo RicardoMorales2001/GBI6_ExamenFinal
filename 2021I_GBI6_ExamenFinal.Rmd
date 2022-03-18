@@ -12,6 +12,8 @@ output:
     toc_float:
       collapsed: no
       smooth_scroll: yes
+lang: es-ES
+
 ---
 
 
@@ -123,14 +125,9 @@ file = "mRNA_expr_summary.doc")
 ```
 
 ### [0.5 PUNTOS] 1.6 Interprete los resultados de la tabla resultante de la sección 1.5. 
-
-
 ```{tex}
-
+# The table is a summary of data and it can be seen that the genes with the highest gene expression are ESR1 and MUC1, unlike XBP1 and GATA3, which are expressed to a lesser extent.
 ```
-
-
-
 ## **Pregunta 2 VISUALIZACION DE DATOS  [5 PUNTOS]**
 
 Para esta pregunta tiene que utilizar la data ```df_long```. 
@@ -336,6 +333,7 @@ ggsave("regresion11.pdf", width = 6, height = 8, dpi = 300)
 
 ### [1 PUNTO] 2.7. Interprete los resultados de las figuras ```boxplot3.png``` y ```regresion11.pdf```.
 ```{tex}
+# There is a gene overexpression of the LUSC gene, since it is higher than average.
 ```
 
 ## 3. CONTROL DE LA VERSIÓN [1 PUNTO]. Se verficará en ell repositorio de GitHub. 
