@@ -79,3 +79,148 @@ cancertype_boxplots = lapply(tipo_de_cancer, function(x) {ggplot(x, aes(dataset,
 cancertype_boxplots[3]
 ggsave("boxplot3.png", width = 6, height = 8, dpi = 300)
 
+### 2.4 Escriba la función reg_gen_expression, con el parámetro gen. En este caso 
+### la función visualizará una gráfica de nube de puntos (geom_point) y una 
+### regresión por tipo de "dataset". La gráfica será de comparación de gen1 con 
+### gen2; por ejemplo en el eje "x" GATA3 y en el eje "y"" FN1.
+data_Sett <- list(
+  BRCA <- filter(df_long, dataset == "BRCA"),
+  OV <- filter(df_long, dataset == "OV"),
+  LUSC <- filter(df_long, dataset == "LUSC"),
+  KIPAN <- filter(df_long, dataset == "KIPAN"),
+  KIRP <- filter(df_long, dataset == "KIRP"),
+  UCEC <- filter(df_long, dataset == "UCEC"), 
+  GAPDH <- filter(df_long, dataset == "GAPDH")
+)
+
+graficasc <- list (  
+  BRCA_1 <- BRCA %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  OV_1 <- OV %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  LUSC_1 <- LUSC %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  KIPAN_1 <- KIPAN %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  KIRP_1 <- KIRP %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  UCEC_1 <- UCEC %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row),
+  GAPH_1 <- UCEC %>% group_by(gen) %>% mutate(row = row_number()) %>%
+    tidyr::pivot_wider(names_from = gen, values_from = expresion_level) %>%
+    select(-row)
+)
+
+reg_gen_expression <- function (gen) {
+  if (gen == "GATA3"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GATA3, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "PTEN"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(PTEN, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "XBP1"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(XBP1, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "ESR1"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(ESR1, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "MUC1"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(MUC1, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "FN1"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(FN1, GAPDH)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+  else if (gen == "GAPDH"){
+    total <- list (
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, GATA3)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, PTEN)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, XBP1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, ESR1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, MUC1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}), 
+      lapply(graficasc, function(x) {ggplot(x, aes(GAPDH, FN1)) + 
+          geom_point() + geom_smooth(method='lm', formula= y~x)}))
+  }
+}
