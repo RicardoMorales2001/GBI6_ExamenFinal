@@ -77,4 +77,5 @@ cancertype_boxplots = lapply(tipo_de_cancer, function(x) {ggplot(x, aes(dataset,
 ### cancertype_boxplots con el nombre boxplot3.png. La definición de a figura 
 ### debe ser de 300dpi.
 cancertype_boxplots[3]
-cancertype_boxplots[2]
+ggsave("boxplot3.png", width = 6, height = 8, dpi = 300)
+
